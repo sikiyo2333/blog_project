@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+    <!--content start-->
+
+    {% block body_block %}
+    <div id="content">
+         <!--left-->
+         <div class="left" id="c_left">
+           <div class="s_tuijian">
+           <h2>最新<span>文章</span></h2>
+           </div>
+          <div class="content_text">
+          {% for atc in article_list %}
+            
+          
+           <!--wz-->
+           <div class="wz">
+            <h3><a href="#" >{{atc.title}}</a></h3>
+             <dl>
+<!--                <dt><img src="{{atc.user.picture}}" width="200"  height="123" alt=""></dt>  -->
+               <dd>
+                 <p class="dd_text_1">{{atc.summary}}</p>
+               <p class="dd_text_2">
+               <span class="left author">{{atc.user}}</span><span class="left sj">{{atc.datetime|date:'Y-m-d'}}</span>
+               <!-- <span class="left fl">分类:<a href="#" title="学无止境">学无止境</a></span> -->
+               <span class="left yd"><a href="{% url 'article' %}?id={{atc.id}}" title="阅读全文">阅读全文</a>
+               </span>
+                <div class="clear"></div>
+               </p>
+               </dd>
+               <div class="clear"></div>
+             </dl>
+             <p>________________________________________________________________________________________</p>
+            </div>
+           <!--wz end-->
+     
+       {% endfor %}
+                            
+
+              <div calss = ''>
+       <span>
+          {% if article_list.has_previous %}
+               <a href="?page={{ article_list.previous_page_number }}">上一页</a>
+            {% endif %}
+ 
+        <span>
+            第 {{ article_list.number }} 页  
+        </span>
+        <span >
+        共 {{ article_list.paginator.num_pages }} 页
+        </span>
+
+    {% if article_list.has_next %}
+            <a href="?page={{ article_list.next_page_number }}">下一页</a>
+    {% endif %}
+        </span>
+</div>
+
+
+
+           </div>
+         </div>
+
+
+
+
+          {% endblock %}
